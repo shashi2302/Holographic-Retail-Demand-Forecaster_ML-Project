@@ -1,0 +1,95 @@
+// dashboard.js
+import React, { useState, useEffect } from 'react';
+import { Line, Heatmap, ThreeJS } from 'react-charts';
+import { fetchForecastData, fetchHistoricalData } from './api';
+
+const RetailDashboard = () => {
+  const [forecastData, setForecastData] = useState([]);
+  const [historicalData, setHistoricalData] = useState([]);
+  const [selectedStore, setSelectedStore] = useState('store_001');
+  const [timeRange, setTimeRange] = useState('7d');
+  
+  useEffect(() => {
+    // Fetch data when component mounts or when selections change
+    const loadData = async () => {
+      const forecast = await fetchForecastData(selectedStore, timeRange);
+      const historical = await fetchHistoricalData(selectedStore, timeRange);
+      
+      setForecastData(forecast);
+      setHistoricalData(historical);
+    };
+    
+    loadData();
+  }, [selectedStore, timeRange]);
+  
+  return (
+    <div className="dashboard-container">
+      <header>
+        <h1>Holographic Retail Demand Forecaster</h1>
+        <div className="controls">
+          <select 
+            value={selectedStore} 
+            onChange={(e) => setSelectedStore(e.target.value)}
+          >
+            {/* Store options */}
+          </select>
+          <select 
+            value={timeRange} 
+            onChange={(e) => setTimeRange(e.target.value)}
+          >
+            {/* Time range options */}
+          </select>
+        </div>
+      </header>
+      
+      <div className="dashboard-content">
+        <div className="chart-container">
+          <h2>Demand Forecast</h2>
+          <Line 
+            data={forecastData}
+            xAxis={{ key: 'date', label: 'Date' }}
+            yAxis={{ key: 'demand', label: 'Projected Demand' }}
+          />
+        </div>
+        
+        <div className="chart-container">
+          <h2>Customer Flow Heatmap</h2>
+          <Heatmap 
+            data={historicalData.flowData}
+            xAxis={{ key: 'x', label: 'Store X Position' }}
+            yAxis={{ key: 'y', label: 'Store Y Position' }}
+            valueKey="density"
+            colorScale={['#fff', '#ffeda0', '#feb24c', '#f03b20']}
+          />
+        </div>
+        
+        <div className="chart-container">
+          <h2>3D Customer Interaction Model</h2>
+          <ThreeJS
+            data={historicalData.interactionData}
+            width={500}
+            height={400}
+            rotatable={true}
+          />
+        </div>
+        
+        <div className="metrics-container">
+          <div className="metric-card">
+            <h3>Projected Sales</h3>
+            <p className="metric-value">${forecastData.projectedSales}</p>
+          </div>
+          <div className="metric-card">
+            <h3>Customer Count (est.)</h3>
+            <p className="metric-value">{forecastData.customerCount}</p>
+          </div>
+          <div className="metric-card">
+            <h3>Conversion Rate</h3>
+            <p className="metric-value">{forecastData.conversionRate}%</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default RetailDashboard;
