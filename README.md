@@ -2,17 +2,17 @@
 
 System Architecture - Outlines the full data flow from collection to analytics
 
-┌───────────────────┐    ┌────────────────────┐    ┌───────────────────┐
-│ Data Collection   │    │ Data Processing &  │    │ Forecasting       │
-│ (AR Environment)  │───►│ Holographic Memory │───►│ & Visualization   │
-└───────────────────┘    └────────────────────┘    └───────────────────┘
-                                   ▲                        ▲
-                                   │                        │
-                                   ▼                        ▼
-                          ┌─────────────────┐     ┌──────────────────┐
-                          │ Model Training  │     │ Retail Analytics │
-                          │ & Validation    │     │ Dashboard        │
-                          └─────────────────┘     └──────────────────┘
+  
+ Data Collection       Data Processing &          Forecasting       
+ (AR Environment)  ───► Holographic Memory ───► & Visualization   
+       
+                                                          
+                               │                        │
+                                                           
+                          
+                           Model Training           Retail Analytics 
+                            & Validation               Dashboard        
+                        
                           
 key components:-
 
