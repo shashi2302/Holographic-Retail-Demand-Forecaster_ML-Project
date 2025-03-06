@@ -2,19 +2,7 @@
 
 System Architecture - Outlines the full data flow from collection to analytics
 
-  
- Data Collection       Data Processing &          Forecasting       
- (AR Environment)  ───► Holographic Memory ───► & Visualization   
-       
-                                                          
-                               │                        │
-                                                           
-                          
-                           Model Training           Retail Analytics 
-                            & Validation               Dashboard        
-                        
-                          
-key components:-
+ key components:-
 
 Data Collection - AR environment setup with ARKit to gather 3D customer behavior
 
