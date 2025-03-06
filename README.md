@@ -1,8 +1,7 @@
 # Holographic-Retail-Demand-Forecaster_ML-Project
 
-System Architecture - Outlines the full data flow from collection to analytics
 
- key components:-
+key components:-
 
 Data Collection - AR environment setup with ARKit to gather 3D customer behavior
 
